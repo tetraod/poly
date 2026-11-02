@@ -3,7 +3,7 @@
 #include <time.h>
 #include <stdbool.h>
 
-#define MAX_COEF 5
+#define MAX_COEF 10
 #define POLY_MAX_TERM 10
 
 char var_cand[50]={"xy\0"};
@@ -51,6 +51,7 @@ else {
 if (t.coef>0) {printf("+");}
 if (t.coef!=-1 && t.coef!=1) {printf("%d", t.coef);}
 if ((t.coef==-1 || t.coef==1) && t.var[0]=='\0') {printf("%d", t.coef);}
+if (t.coef==-1 && t.var[0]!='\0') {printf("-");}
 
 //max len 50
 
@@ -94,6 +95,30 @@ for (int j=0;j<p2.nom;j++) {p3.terms[k]=multiply_term(p1.terms[i],p2.terms[j]);k
 p3.nom=p1.nom*p2.nom;
 
 return p3;
+}
+
+bool like_term(struct term t1, struct term t2) {
+bool like=true;
+
+int i;
+for (i=0;t1.var[i]!='\0';i++) {
+if (t1.var[i]!=t2.var[i]) {like=false;break;}
+}
+
+if (t2.var[i]!='\0') {like=false;}
+
+return like;
+}
+
+struct poly cb_like (struct poly p) {
+struct poly like;
+like.nom=0;
+
+for (int i=0;i<p.nom;i++) {
+if 
+}
+
+
 }
 
 struct poly shuffle_poly (struct poly p) {
